@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Time Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Task Time Tracker</h1>
+        
+        <!-- Add Task Form -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Add New Task</h5>
+                        <form id="taskForm">
+                            <div class="mb-3">
+                                <label for="taskName" class="form-label">Task Name</label>
+                                <input type="text" class="form-control" id="taskName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Category</label>
+                                <select class="form-select" id="category">
+                                    <option value="Work">Work</option>
+                                    <option value="Study">Study</option>
+                                    <option value="Personal">Personal</option>
+                                    <option value="Exercise">Exercise</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Task</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks List -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Your Tasks</h5>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Category</th>
+                                        <th>Timer</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tasksList">
+                                    {% for task in tasks %}
+                                    <tr data-task-id="{{ task.id }}">
+                                        <td>{{ task.name }}</td>
+                                        <td><span class="badge bg-secondary">{{ task.category }}</span></td>
+                                        <td>
+                                            <span class="timer">{{ task.total_time }}</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary toggle-timer" data-running="{{ task.is_running|lower }}">
+                                                <i class="bi {% if task.is_running %}bi-pause-fill{% else %}bi-play-fill{% endif %}"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning reset-timer">
+                                                <i class="bi bi-arrow-counterclockwise"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger delete-task">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Chart -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Time Distribution</h5>
+                        <canvas id="timeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Category Summary</h5>
+                        <div id="categorySummary"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+body {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.btn {
+    border-radius: 8px;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+.table th {
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.badge {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.timer {
+    font-family: monospace;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.running {
+    color: #27ae60;
+}
+
+/* Category badges */
+.badge[data-category="Work"] {
+    background-color: #3498db;
+}
+
+.badge[data-category="Study"] {
+    background-color: #9b59b6;
+}
+
+.badge[data-category="Personal"] {
+    background-color: #2ecc71;
+}
+
+.badge[data-category="Exercise"] {
+    background-color: #e74c3c;
+}
+
+.badge[data-category="Other"] {
+    background-color: #95a5a6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .btn {
+        padding: 6px 12px;
+    }
+    
+    .card {
+        margin-bottom: 15px;
+    }
+}
